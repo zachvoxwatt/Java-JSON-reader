@@ -24,11 +24,11 @@ public class JSONProcessorAdvanced
 	{
 		this.dirmap = null;
 		
-		InputStream is = this.getClass().getResourceAsStream("/data/bigdata.json");
+		InputStream is = this.getClass().getResourceAsStream("/data/sample.json");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		JsonReader jr = new JsonReader(br);
 		
-		long start = System.currentTimeMillis();
+		double start = System.nanoTime();
 		
 		try 
 		{ 
@@ -39,8 +39,10 @@ public class JSONProcessorAdvanced
 		}
 		catch (Exception e) { e.printStackTrace(); }
 		
+		//prints all Keys and its associated values (if the key has some)
+		//NOT Recommended to use with the 'bigdata.json' file!
 		
-		/*
+		
 		for (Map.Entry<String, List<String>> itor: this.dirmap.entrySet())
 		{
 			System.out.println(itor.getKey());
@@ -59,11 +61,10 @@ public class JSONProcessorAdvanced
 			
 			System.out.println();
 		}
-		*/
 		
-		long end = System.currentTimeMillis();
-		System.out.printf("Done! The Operation took %d ms\n", end - start);
-		System.out.println(dirmap.hashCode());
+		
+		double end = System.nanoTime();
+		System.out.printf("Done! The Operation took %.2f ms\n", (end - start) / 1000000);
 	}
 	   
 	private Map<String, List<String>> readJSONFile(JsonReader reader) throws IOException
